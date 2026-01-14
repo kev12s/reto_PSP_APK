@@ -1,0 +1,103 @@
+# Archivos compilados de Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Directorios de salida de Maven
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Directorios de Eclipse
+.settings/
+.classpath
+.project
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+
+# Archivos específicos de Eclipse
+*.launch
+
+# Archivos de STS (Spring Tool Suite)
+.springBeans
+
+# Archivos de IntelliJ (por si acaso)
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Archivos de NetBeans
+nbactions.xml
+nb-configuration.xml
+
+# Archivos de VS Code
+.vscode/
+
+# Archivos de logs
+*.log
+log/
+logs/
+
+# Archivos de caché
+.cache/
+
+# Archivos de sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de dependencias
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Archivos de cobertura de código
+coverage/
+*.exec
+
+# Archivos de configuración de Checkstyle/PMD/FindBugs
+checkstyle-checker.xml
+checkstyle-result.xml
+pmd.xml
+findbugs.xml
+
+# Archivos de ensamblado de Maven
+dist/
+release.properties
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# Archivos de propiedades de usuario
+user.properties
+
+# Archivos de Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Archivos de configuración de IDE
+.factorypath
+
+# Archivos de revisión de dependencias
+dependency-reduced-pom.xml
+
+# Archivos de ensamblado de paquetes
+*.zip
+*.tar
+*.tar.gz
+
+# Archivos de documentación
+apidocs/
+javadoc/
