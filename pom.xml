@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eus.tartanga.psp</groupId>
-  <artifactId>holamundo</artifactId>
+  <artifactId>reto_PSP_APK</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>holamundo</name>
-  <description>A simple holamundo.</description>
+  <name>reto_PSP_APK</name>
+  <description>Descarga de apks</description>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
