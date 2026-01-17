@@ -66,7 +66,7 @@ public class ApkService {
             }
 
             //usa el nombre de la apk buscada para acceder a la carpeta y buscar la APK
-            File apkFile = ResourceUtils.getFile(getClass().getResource("/apks/" + apk.getNombre())); 
+            File apkFile = ResourceUtils.getFile(getClass().getResource("/apks/" + apk.getNombreApk())); 
             
             // Leer bytes para descargar
             FileInputStream fis = new FileInputStream(apkFile);
@@ -91,7 +91,7 @@ public class ApkService {
 	            	return null;
 	            }
 	            
-	            File imagenFile = ResourceUtils.getFile(getClass().getResource("/images/" + apk.getPathImg())); //carga la imagen 
+	            File imagenFile = ResourceUtils.getFile(getClass().getResource("/images/" + apk.getIcono())); //carga la imagen 
 	            
 	            FileInputStream fis = new FileInputStream(imagenFile);
 	            byte[] bytes = new byte[(int) imagenFile.length()];
@@ -117,7 +117,7 @@ public class ApkService {
 	                return null;
 	            }
 	            
-	            String nombreApk = apk.getNombre(); 
+	            String nombreApk = apk.getNombreApk(); 
 	            
 	            // Buscar el archivo en resources/apks/
 	            File apkFile = ResourceUtils.getFile(getClass().getResource("/apks/" + nombreApk));

@@ -3,10 +3,14 @@
     "id": 1,
     "nombre": "Calculadora",
     "descripcion": "Calculadora simple",
+    "nombreAPK": "calculadora.apk"
+    "icono": "icono_calc.png"
   },
   {
     "id": 2,
     "nombre": "Notas",
     "descripcion": "App para tomar notas",
+    "nombreAPK": "notas.apk",
+    "icono": "icono_notas.png"
   }
 ]

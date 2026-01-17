@@ -4,19 +4,19 @@ public class Apk {
     private Integer id;
     private String nombre;
     private String descripcion;
-    private String pathImg;
-    private String pathApk;
+    private String icono;
+    private String nombreApk;
     
     // Constructor vacío necesario para ObjectMapper
     public Apk() {}
 
-	public Apk(Integer id, String nombre, String descripcion, String pathImg, String pathApk) {
+	public Apk(Integer id, String nombre, String descripcion, String nombreImg, String nombreApk) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.pathImg = pathImg;
-		this.pathApk = pathApk;
+		this.icono = nombreImg;
+		this.nombreApk = nombreApk;
 	}
 
 	public Integer getId() {
@@ -43,26 +43,26 @@ public class Apk {
 		this.descripcion = descripcion;
 	}
 
-	public String getPathImg() {
-		return pathImg;
+	public String getIcono() {
+		return icono;
 	}
 
-	public void setPathImg(String pathImg) {
-		this.pathImg = pathImg;
+	public void setIcono(String icono) {
+		this.icono = icono;
 	}
 
-	public String getPathApk() {
-		return pathApk;
+	public String getNombreApk() {
+		return nombreApk;
 	}
 
-	public void setPathApk(String pathApk) {
-		this.pathApk = pathApk;
+	public void setNombreApk(String nombreApk) {
+		this.nombreApk = nombreApk;
 	}
 
 	@Override
 	public String toString() {
-		return "Apk [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", pathImg=" + pathImg
-				+ ", pathApk=" + pathApk + "]";
+		return "Apk [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", icono=" + icono
+				+ ", nombreApk=" + nombreApk + "]";
 	}
     
     
