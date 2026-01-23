@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="157dp"
+            android:layout_height="157dp"
+            android:layout_weight="1"
+            android:background="#001550"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="190dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/tartangastoreicon" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="157dp"
+                android:layout_height="157dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/checkbox_off_background"
+                android:text="Button"
+                android:textColorLink="#00aaaa" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="157dp"
+                android:layout_height="157dp"
+                android:layout_weight="1"
+                android:background="#0004FF"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="157dp"
+                android:layout_height="157dp"
+                android:layout_weight="1"
+                android:text="Button" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:lineSpacingExtra="8sp"
+        android:text="Settings"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="297dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Audio:"
+            android:textColor="@color/black"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:max="10"
+            android:progress="3" />
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Modo Oscuro:"
+        android:textAlignment="viewStart"
+        android:textSize="48sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
