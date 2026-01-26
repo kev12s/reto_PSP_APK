@@ -8,8 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ContentDisposition;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,67 +24,108 @@ import eus.tartanga.psp.apk.service.ApkService;
 @RequestMapping("/apks")
 public class ApkController {
 
-    private final ApkService apkService;
+	private final ApkService apkService;
 
-    public ApkController(ApkService apkService) {
-        this.apkService = apkService;
-    }
+	public ApkController(ApkService apkService) {
+		this.apkService = apkService;
+	}
 
-    //devolver todas las apks
-    @GetMapping
-    public ResponseEntity<List<Apk>> obtenerTodasApks() {
-        List<Apk> apks = apkService.obtenerApks();
-        return ResponseEntity.ok(apks);
-    }
+	//APLICACIONES
+	//devolver todas las apks
+	@GetMapping
+	public ResponseEntity<List<Apk>> obtenerTodasApks() {
+		List<Apk> apks = apkService.obtenerApks();
+		return ResponseEntity.ok(apks);
+	}
 
-    //Descargar una apk en concreto 
-    @GetMapping("/descargarAPK/{id}")
-    public ResponseEntity<byte[]> descargarApk(@PathVariable Integer id) {
-        byte[] apkBytes = apkService.obtenerApkBytes(id);
+	//Descargar una apk en concreto 
+	@GetMapping("/descargarAPK/{id}")
+	public ResponseEntity<byte[]> descargarApk(@PathVariable Integer id) {
+		byte[] apkBytes = apkService.obtenerApkBytes(id);
 
-        if (apkBytes != null) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            headers.setContentDisposition(
-                ContentDisposition.attachment()
-                    .filename("app_" + id + ".apk")
-                    .build()
-            );
-            headers.setContentLength(apkBytes.length);
+		if (apkBytes != null) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.setContentDisposition(
+					ContentDisposition.attachment()
+					.filename("app_" + id + ".apk")
+					.build()
+					);
+			headers.setContentLength(apkBytes.length);
 
-            return new ResponseEntity<>(apkBytes, headers, HttpStatus.OK);
-        }
+			return new ResponseEntity<>(apkBytes, headers, HttpStatus.OK);
+		}
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
 
-    //devuelve la imagen
-    @GetMapping("/imagenAPK/{id}")
-    public ResponseEntity<byte[]> getImagen(@PathVariable int id) {
-        byte[] imageBytes = apkService.obtenerImagenApk(id);
-        
-        if (imageBytes != null) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_PNG);
-            headers.setContentLength(imageBytes.length);
-            
-            return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
-        }
-        
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
-    
-    @GetMapping("/hash/{id}")
-    public ResponseEntity<String> obtenerHash(@PathVariable Integer id) {
-        String hash = apkService.obtenerHash(id);
-        
-        if (hash != null && !hash.isEmpty()) {
-            return ResponseEntity.ok(hash);
-        }
-        
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("APK no encontrada");
-    }
-    
+	//devuelve la imagen
+	@GetMapping("/imagenAPK/{id}")
+	public ResponseEntity<byte[]> getImagen(@PathVariable int id) {
+		byte[] imageBytes = apkService.obtenerImagenApk(id);
+
+		if (imageBytes != null) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_PNG);
+			headers.setContentLength(imageBytes.length);
+
+			return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+		}
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
+
+	@GetMapping("/hash/{id}")
+	public ResponseEntity<String> obtenerHash(@PathVariable Integer id) {
+		String hash = apkService.obtenerHash(id);
+
+		if (hash != null && !hash.isEmpty()) {
+			return ResponseEntity.ok(hash);
+		}
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body("APK no encontrada");
+	}
+
+	//DESCRIPCION
+	//Modificar descripcion 
+	@PutMapping("/descripcion/{id}")
+	public ResponseEntity<Apk> actualizarDescripcion(@PathVariable int id, @RequestBody String descripcion){
+
+		Apk apk = apkService.modificarDescripcion(id, descripcion);
+
+		if(apk == null) {
+			return (ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+		}
+
+		return ResponseEntity.ok(apk);
+	}
+
+	//Añadir descripcion 
+	@PostMapping("/descripcion/{id}")
+	public ResponseEntity<Apk> añadirDescripcion(@PathVariable int id, @RequestBody String descripcion){
+
+		Apk apk = apkService.añadirDescripcion(id, descripcion);
+
+		if(apk == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}else {
+			return ResponseEntity.status(HttpStatus.OK).body(apk);
+		}
+	}
+
+	//Borrar descripcion 
+	@DeleteMapping("/descripcion/{id}")
+	public ResponseEntity<String> eliminarDescripcion(@PathVariable int id){
+
+		boolean eliminada = apkService.eliminarDescripcion(id);
+
+		if(eliminada){
+			return ResponseEntity.status(HttpStatus.OK).body("Descripcion eliminada");
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Descripcion no encontrada");
+		}
+	}
+
 
 }
