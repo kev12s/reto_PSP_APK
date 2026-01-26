@@ -11,7 +11,6 @@ public class Apk {
     public Apk() {}
 
 	public Apk(Integer id, String nombre, String descripcion, String nombreImg, String nombreApk) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;

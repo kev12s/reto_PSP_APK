@@ -91,7 +91,7 @@ public class ApkService {
 	            	return null;
 	            }
 	            
-	            File imagenFile = ResourceUtils.getFile(getClass().getResource("/images/" + apk.getIcono())); //carga la imagen 
+	            File imagenFile = ResourceUtils.getFile(getClass().getResource("/iconos/" + apk.getIcono())); //carga la imagen 
 	            
 	            FileInputStream fis = new FileInputStream(imagenFile);
 	            byte[] bytes = new byte[(int) imagenFile.length()];
