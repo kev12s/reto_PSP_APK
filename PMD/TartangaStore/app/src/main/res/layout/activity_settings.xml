@@ -7,13 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/materialToolbar"
-            android:layout_width="157dp"
-            android:layout_height="157dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#001550"
             android:minHeight="?attr/actionBarSize"
@@ -21,15 +21,15 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="190dp"
-                android:layout_height="140dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/tartangastoreicon" />
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="157dp"
-                android:layout_height="157dp"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/checkbox_off_background"
                 android:text="Button"
@@ -37,16 +37,16 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="157dp"
-                android:layout_height="157dp"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
                 android:layout_weight="1"
                 android:background="#0004FF"
                 android:text="Button" />
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="157dp"
-                android:layout_height="157dp"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
                 android:layout_weight="1"
                 android:text="Button" />
         </com.google.android.material.appbar.MaterialToolbar>
