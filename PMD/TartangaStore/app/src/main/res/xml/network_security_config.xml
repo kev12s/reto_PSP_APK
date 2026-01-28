@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <!-- Para emulador Android Studio -->
+    <domain-config>
+        <!-- Dominios -->
         <domain includeSubdomains="true">10.0.2.2</domain>
-        <!-- Para tu PC (cambia 192.168.1.100 por tu IP real) -->
         <domain includeSubdomains="true">192.168.41.128</domain>
+
+        <!-- ⚠️ IMPORTANTE para certificados auto-firmados -->
+        <trust-anchors>
+            <certificates src="system" />          <!-- Certificados del sistema -->
+            <certificates src="user" />            <!-- Certificados instalados por usuario -->
+            <!-- Si quieres confiar en TODOS los certificados (¡CUIDADO! desarrollo solo): -->
+            <!-- <certificates src="@raw/certificado" /> --> <!-- Tu certificado específico -->
+        </trust-anchors>
     </domain-config>
+
+    <!-- Configuración base (backup) -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
 </network-security-config>

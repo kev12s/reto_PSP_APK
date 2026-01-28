@@ -1,16 +1,13 @@
-[
-  {
-    "id": 1,
-    "nombre": "Calculadora",
-    "descripcion": "Calculadora simple",
-    "nombreApk": "calculadora.apk",
-    "icono": "icono_calc.png"
-  },
-  {
-    "id": 2,
-    "nombre": "Notas",
-    "descripcion": "App para tomar notas",
-    "nombreApk": "notas.apk",
-    "icono": "icono_notas.png"
-  }
-]
+[ {
+  "id" : 1,
+  "nombre" : "Calculadora",
+  "descripcion" : "Aplicacion actualizada",
+  "icono" : "icono_calc.png",
+  "nombreApk" : "calculadora.apk"
+}, {
+  "id" : 2,
+  "nombre" : "Notas",
+  "descripcion" : "Aplicacion actualizada",
+  "icono" : "icono_notas.png",
+  "nombreApk" : "notas.apk"
+} ]
