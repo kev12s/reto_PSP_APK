@@ -27,28 +27,28 @@
                 app:srcCompat="@drawable/tartangastoreicon" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnHome"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/checkbox_off_background"
-                android:text="Button"
+                android:text="Home"
                 android:textColorLink="#00aaaa" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:layout_weight="1"
                 android:background="#0004FF"
-                android:text="Button" />
+                android:text="Settings" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnAdvice"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Advice" />
         </com.google.android.material.appbar.MaterialToolbar>
     </LinearLayout>
 
