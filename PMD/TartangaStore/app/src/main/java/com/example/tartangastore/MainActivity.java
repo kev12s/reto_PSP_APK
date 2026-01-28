@@ -1,6 +1,7 @@
 package com.example.tartangastore;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tartangastore.api.ApiService;
@@ -42,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
                     // Aquí puedes procesar la lista...
 
                 } else {
-                    Toast.makeText(MainActivity.this,
-                            "❌ Error: " + response.code(),
-                            Toast.LENGTH_SHORT).show();
+                    Log.e("MiApp",
+                            "Error en la respuesta: Código " + response.code() +
+                                    ", Mensaje: " + response.message());
                 }
             }
 
