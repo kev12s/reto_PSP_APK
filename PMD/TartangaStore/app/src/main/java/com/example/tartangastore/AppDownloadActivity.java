@@ -7,30 +7,31 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SettingsActivity extends AppCompatActivity {
+public class AppDownloadActivity extends AppCompatActivity {
 
     private Button btnHome;
-    private Button btnAdvice;
+    private Button btnSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
         btnHome = findViewById(R.id.btnHome);
-        btnAdvice = findViewById(R.id.btnAdvice);
+        btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Abrir MainActivity
+                Intent intent = new Intent(AppDownloadActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Abrir MainActivity
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnAdvice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Abrir MainActivity
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                Intent intent = new Intent(AppDownloadActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

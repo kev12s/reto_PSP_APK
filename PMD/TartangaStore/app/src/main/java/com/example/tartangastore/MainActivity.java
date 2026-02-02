@@ -1,7 +1,10 @@
 package com.example.tartangastore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tartangastore.api.ApiService;
@@ -15,11 +18,21 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ApiService apiService;
-
+    private Button btnSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Abrir SettingsActivity
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 1. Inicializar Retrofit
         apiService = RetrofitInstance.getApiService();
