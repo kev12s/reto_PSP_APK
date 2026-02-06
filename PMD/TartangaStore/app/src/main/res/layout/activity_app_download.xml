@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="120dp"
-            android:layout_height="81dp"
+            android:layout_width="127dp"
+            android:layout_height="103dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,8 +23,8 @@
 
         <LinearLayout
             android:id="@+id/materialToolbar"
-            android:layout_width="281dp"
-            android:layout_height="48dp"
+            android:layout_width="286dp"
+            android:layout_height="72dp"
             android:background="@android:drawable/editbox_background"
             android:backgroundTint="#000630"
             android:minHeight="?attr/actionBarSize"
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView">
 
             <Button
-                android:id="@+id/btnHome"
+                android:id="@+id/btnExitAdvise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -15,21 +15,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private ApiService apiService;
     private Button btnSettings;
+    private Button btnAdvice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeHelper.applyTheme(this);
         setContentView(R.layout.activity_main);
-
+        btnAdvice = findViewById(R.id.btnAdvice);
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Abrir SettingsActivity
+                // CORRECTO: Abre SettingsActivity
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAdvice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // CORREGIDO: Ahora abre AdviseActivity
+                Intent intent = new Intent(MainActivity.this, AdviseActivity.class);
                 startActivity(intent);
             }
         });
