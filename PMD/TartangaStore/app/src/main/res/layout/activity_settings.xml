@@ -34,14 +34,13 @@
             app:layout_constraintStart_toEndOf="@+id/imageView">
 
             <Button
-                android:id="@+id/btnHome"
+                android:id="@+id/btnExitAdvise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/windowSplashScreenIconBackgroundColor"
                 android:text="@string/HomeStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColorLink="#00aaaa"
                 android:textSize="10sp"
                 tools:ignore="NewApi" />
 
@@ -76,7 +75,6 @@
         android:lineSpacingExtra="8sp"
         android:text="@string/SettingsStr"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="60sp"
         android:textStyle="bold" />
 
@@ -97,7 +95,6 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-smallcaps"
             android:text="@string/VolumeStr"
-            android:textColor="@color/black"
             android:textSize="48sp"
             android:textStyle="bold" />
 
@@ -116,9 +113,6 @@
         android:layout_width="match_parent"
         android:layout_height="97dp"
         android:fontFamily="sans-serif-smallcaps"
-        android:rotation="0"
-        android:rotationX="0"
-        android:rotationY="0"
         android:text="@string/DarkmodeStr"
         android:textAlignment="viewStart"
         android:textSize="48sp"

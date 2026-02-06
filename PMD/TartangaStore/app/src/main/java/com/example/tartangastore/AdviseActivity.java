@@ -9,15 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AdviseActivity extends AppCompatActivity {
 
-    private Button btnHome;
+    private Button btnExitAdvise;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        ThemeHelper.applyTheme(this);
+        setContentView(R.layout.activity_advise);
 
-        btnHome = findViewById(R.id.btnHome);
+        btnExitAdvise = findViewById(R.id.btnExitAdvise);
 
-        btnHome.setOnClickListener(new View.OnClickListener() {
+        btnExitAdvise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Abrir MainActivity

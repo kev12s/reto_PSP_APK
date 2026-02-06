@@ -14,9 +14,10 @@ public class AppDownloadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeHelper.applyTheme(this);
         setContentView(R.layout.activity_settings);
 
-        btnHome = findViewById(R.id.btnHome);
+        btnHome = findViewById(R.id.btnExitAdvise);
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
