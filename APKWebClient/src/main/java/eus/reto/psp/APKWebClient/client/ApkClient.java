@@ -19,6 +19,9 @@ public class ApkClient {
         this.baseUrl = baseUrl;
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
+                .codecs(configurer-> configurer 
+                		.defaultCodecs()
+                		.maxInMemorySize(10*1024*1024))
                 .defaultHeader("Accept", MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                 .build();
@@ -44,7 +47,7 @@ public class ApkClient {
     public byte[] descargarApk(int id) {
         try {
         	byte[] bytes = webClient.get()
-                    .uri("/descargarAPK/{id}", id)
+                    .uri("apks/descargarAPK/{id}", id)
                     .retrieve()
                     .bodyToMono(byte[].class)
                     .block();
@@ -60,7 +63,7 @@ public class ApkClient {
     public byte[] descargarImagen(int id) {
         try {
         	byte[] bytes = webClient.get()
-                    .uri("/imagenAPK/{id}", id)
+                    .uri("apks/imagenAPK/{id}", id)
                     .retrieve()
                     .bodyToMono(byte[].class)
                     .block();
@@ -93,7 +96,7 @@ public class ApkClient {
     public Apk modificarDescripcion(int id, String descripcion) {
         try {
         	Apk apk = webClient.put()
-                    .uri("/descripcion/{id}", id)
+                    .uri("apks/descripcion/{id}", id)
                     .header("Content-Type", MediaType.TEXT_PLAIN_VALUE)
                     .bodyValue(descripcion)
                     .retrieve()
@@ -113,7 +116,7 @@ public class ApkClient {
     public Apk añadirDescripcion(int id, String descripcion) {
         try {
         	Apk apk = webClient.post()
-                    .uri("/descripcion/{id}", id)
+                    .uri("apks/descripcion/{id}", id)
                     .bodyValue(descripcion)
                     .retrieve()
                     .bodyToMono(Apk.class)
@@ -132,7 +135,7 @@ public class ApkClient {
     public HttpStatusCode eliminarDescripcion(int id) {
         try {
         	Apk apk = webClient.delete()
-                    .uri("/descripcion/{id}", id)
+                    .uri("apks/descripcion/{id}", id)
                     .retrieve()
                     .bodyToMono(Apk.class)
                     .block();
