@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="HomeStr">Principal</string>
+    <string name="SettingsStr">Ajustes</string>
+    <string name="AdviceStr">Consejos</string>
+    <string name="DownloadStr">Descargar</string>
+    <string name="ExitStr">Salir</string>
+    <string name="DarkmodeStr">Modo Oscuro</string>
+    <string name="VolumeStr">Volumen</string>
+    <string name="NextStr">Siguiente</string>
+    <string name="ApplyStr">Aplicar</string>
+</resources>

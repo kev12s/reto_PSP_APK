@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/windowSplashScreenIconBackgroundColor"
-                android:text="Home"
+                android:text="@string/HomeStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColorLink="#00aaaa"
                 android:textSize="10sp"
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:backgroundTint="#00000000"
-                android:text="Settings"
+                android:text="@string/SettingsStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="10sp" />
 
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                android:text="Advice"
+                android:text="@string/AdviceStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/DownloadStr" />
 
         <Button
             android:id="@+id/button5"
@@ -188,7 +188,7 @@
             android:layout_width="257dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/ExitStr" />
     </LinearLayout>
 
 </LinearLayout>

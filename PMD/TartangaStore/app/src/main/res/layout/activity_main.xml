@@ -10,14 +10,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="101dp"
         android:background="@android:color/system_on_primary_dark"
         tools:ignore="NewApi">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="120dp"
-            android:layout_height="81dp"
+            android:layout_width="108dp"
+            android:layout_height="89dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,8 +25,8 @@
 
         <LinearLayout
             android:id="@+id/materialToolbar"
-            android:layout_width="281dp"
-            android:layout_height="48dp"
+            android:layout_width="287dp"
+            android:layout_height="62dp"
             android:background="@android:drawable/editbox_background"
             android:backgroundTint="#000630"
             android:minHeight="?attr/actionBarSize"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/windowSplashScreenIconBackgroundColor"
-                android:text="Home"
+                android:text="@string/HomeStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColorLink="#00aaaa"
                 android:textSize="10sp"
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:backgroundTint="#00000000"
-                android:text="Settings"
+                android:text="@string/SettingsStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="10sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                android:text="Advice"
+                android:text="@string/AdviceStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="10sp" />
         </LinearLayout>
