@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="HomeStr">Direktorioa</string>
+    <string name="SettingsStr">Ezarpenak</string>
+    <string name="AdviceStr">Aholkuak</string>
+    <string name="DownloadStr">Jaitsi</string>
+    <string name="ExitStr">Atera</string>
+    <string name="DarkmodeStr">Iluntasun Modua</string>
+    <string name="VolumeStr">Bolumena</string>
+    <string name="NextStr">Hurrengoa</string>
+    <string name="ApplyStr">Ezarri</string>
+</resources>
