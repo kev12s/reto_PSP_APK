@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/windowSplashScreenIconBackgroundColor"
-                android:text="Home"
+                android:text="@string/HomeStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColorLink="#00aaaa"
                 android:textSize="10sp"
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:backgroundTint="#00000000"
-                android:text="Settings"
+                android:text="@string/btnSettingsStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="10sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                android:text="Advice"
+                android:text="@string/btnAdviceStr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="10sp" />
         </LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TartangaStore</string>
+    <string name="HomeStr">Tienda</string>
+    <string name="btnSettingsStr">Ajustes</string>
+    <string name="btnAdviceStr">Consejos</string>
+</resources>
