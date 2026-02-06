@@ -7,7 +7,7 @@
 }, {
   "id" : 2,
   "nombre" : "Notas",
-  "descripcion" : "holaaaaaaa",
+  "descripcion" : "",
   "icono" : "icono_notas.png",
   "nombreApk" : "notas.apk"
 } ]
