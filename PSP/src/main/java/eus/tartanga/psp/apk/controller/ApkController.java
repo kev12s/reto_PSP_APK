@@ -1,5 +1,7 @@
 package eus.tartanga.psp.apk.controller;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 // CORRECTOS imports de Spring
@@ -109,6 +111,46 @@ public class ApkController {
 			System.err.println(e.getMessage());
 			return (ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
 		}
+	}
+	
+	//verificar hash enviado por el cliente
+	@PostMapping("/verificarHash/{id}")
+	public ResponseEntity<Boolean> verificarHash(@PathVariable Integer id, 
+	                                           @RequestBody byte[] apkBytes) {
+	    try {
+	        if (apkBytes == null || apkBytes.length == 0) {
+	            return ResponseEntity.badRequest().body(false);
+	        }
+	        
+	        // Obtener hash de la APK almacenada en el servidor
+	        String hashServidor = apkService.obtenerHash(id);
+	        if (hashServidor == null) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+	        }
+	        
+	        // Calcular hash de los bytes recibidos usando el método del service
+	        String hashCliente = apkService.calcularHash(apkBytes);
+	        if (hashCliente == null) {
+	            return ResponseEntity.badRequest().body(false);
+	        }
+	        
+	        // Comparar hashes
+	        boolean hashesIguales = hashServidor.equalsIgnoreCase(hashCliente);
+	        
+	        System.out.println("Verificación hash para APK ID " + id + ":");
+	        System.out.println("  Hash servidor: " + hashServidor);
+	        System.out.println("  Hash cliente:  " + hashCliente);
+	        System.out.println("  Resultado: " + (hashesIguales ? "COINCIDEN" : "NO COINCIDEN"));
+	        
+	        return ResponseEntity.ok(hashesIguales);
+	        
+	    } catch (NoSuchAlgorithmException e) {
+	        System.err.println("Error algoritmo hash: " + e.getMessage());
+	        return ResponseEntity.internalServerError().body(false);
+	    } catch (Exception e) {
+	        System.err.println("Error en verificarHash: " + e.getMessage());
+	        return ResponseEntity.internalServerError().body(false);
+	    }
 	}
 
 	//DESCRIPCION

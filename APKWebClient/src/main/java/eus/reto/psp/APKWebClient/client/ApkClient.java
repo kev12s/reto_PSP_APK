@@ -1,11 +1,10 @@
 package eus.reto.psp.APKWebClient.client;
 
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import eus.reto.psp.APKWebClient.model.Apk;
-import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -112,6 +111,31 @@ public class ApkClient {
         }catch (Exception e) {
             System.err.println("Error inesperado: " + e.getMessage());
             return null;
+        }
+    }
+    
+    //verificacion del hash
+    public boolean verificarHash(int id, byte[] apkBytes) {
+        try {
+            System.out.println("Verificando hash para APK ID: " + id);
+            
+            Boolean resultado = webClient.post()
+                .uri("/apks/verificarHash/{id}", id)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .bodyValue(apkBytes)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+            
+            return resultado != null && resultado;
+            
+        } catch (WebClientResponseException e) {
+            System.err.println("Error HTTP " + e.getStatusCode() + " verificando hash: " + 
+                              e.getResponseBodyAsString());
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error inesperado verificando hash: " + e.getMessage());
+            return false;
         }
     }
     

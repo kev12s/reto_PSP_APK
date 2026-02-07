@@ -162,8 +162,14 @@ public class VentanaMain extends JFrame {
 					int id = Integer.parseInt(idtextField.getText());          
 
 					byte[] bytes = cliente.descargarApk(id);
-
+					
 					if(bytes != null && bytes.length > 0) {
+		                lblMensaje.setText("APK descargada (" + bytes.length + " bytes). Verificando hash...");
+					}
+					
+					boolean hashValido = cliente.verificarHash(id, bytes);
+
+					if(hashValido) {
 						// Crear carpeta "descargas" si no existe
 						File downloadsDir = new File("descargas");
 						if (!downloadsDir.exists()) {
