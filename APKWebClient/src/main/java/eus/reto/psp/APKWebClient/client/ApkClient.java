@@ -5,7 +5,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import eus.reto.psp.APKWebClient.model.Apk;
+import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,12 +20,13 @@ public class ApkClient {
     public ApkClient(String baseUrl) {
         this.baseUrl = baseUrl;
         this.webClient = WebClient.builder()
-                .baseUrl(baseUrl)
-                .codecs(configurer-> configurer 
-                		.defaultCodecs()
-                		.maxInMemorySize(10*1024*1024))
+        		.baseUrl(baseUrl)
+                .codecs(configurer -> configurer 
+                    .defaultCodecs()
+                    .maxInMemorySize(100 * 1024 * 1024)) // para descargar archivos grandes
                 .defaultHeader("Accept", MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+           //   .defaultHeader("Accept", MediaType.APPLICATION_OCTET_STREAM_VALUE)
                 .build();
     }
     
@@ -46,8 +49,39 @@ public class ApkClient {
     //descarga binaria apk
     public byte[] descargarApk(int id) {
         try {
+            System.out.println("Iniciando descarga de APK ID: " + id);
+            
+            return webClient.get()
+                .uri("/apks/descargarAPK/{id}", id)
+                .accept(MediaType.APPLICATION_OCTET_STREAM)
+                .retrieve()
+                .bodyToMono(byte[].class)
+                .timeout(Duration.ofSeconds(60)) // Aumentar timeout
+                .doOnSubscribe(s -> System.out.println("Suscrito a descarga"))
+                .doOnSuccess(data -> {
+                    if (data != null) {
+                        System.out.println("Descarga completada: " + data.length + " bytes");
+                    }
+                })
+                .doOnError(e -> System.err.println("Error durante descarga: " + e.getMessage()))
+                .block();
+                
+        } catch (WebClientResponseException e) {
+            System.err.println(e.getStatusCode());
+            System.err.println("Error al descargar APK ID " + id + ": " + e.getMessage());
+            return null;
+        }catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            return null;
+        }
+            
+    }
+    
+    //descarga binaria imagen
+    public byte[] descargarImagen(int id) {
+        try {
         	byte[] bytes = webClient.get()
-                    .uri("apks/descargarAPK/{id}", id)
+                    .uri("/apks/imagenAPK/{id}", id)
                     .retrieve()
                     .bodyToMono(byte[].class)
                     .block();
@@ -56,21 +90,8 @@ public class ApkClient {
         } catch (WebClientResponseException e) {
             System.err.println(e.getStatusCode());
             return null;
-        }
-    }
-    
-    //descarga binaria imagen
-    public byte[] descargarImagen(int id) {
-        try {
-        	byte[] bytes = webClient.get()
-                    .uri("apks/imagenAPK/{id}", id)
-                    .retrieve()
-                    .bodyToMono(byte[].class)
-                    .block();
-            
-            return bytes;
-        } catch (WebClientResponseException e) {
-            System.err.println(e.getStatusCode());
+        }catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
             return null;
         }
     }
@@ -79,7 +100,7 @@ public class ApkClient {
     public String obtenerHash(int id) {
     	try {
     		String hash = webClient.get()
-    				.uri("/hash/{id}", id)
+    				.uri("/apks/hash/{id}", id)
     				.retrieve()
     				.bodyToMono(String.class)
     				.block();
@@ -87,6 +108,9 @@ public class ApkClient {
     		return hash;
     	} catch (WebClientResponseException e) {
             System.err.println(e.getStatusCode());
+            return null;
+        }catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
             return null;
         }
     }
@@ -96,18 +120,18 @@ public class ApkClient {
     public Apk modificarDescripcion(int id, String descripcion) {
         try {
         	Apk apk = webClient.put()
-                    .uri("apks/descripcion/{id}", id)
-                    .header("Content-Type", MediaType.TEXT_PLAIN_VALUE)
+                    .uri("/apks/descripcion/{id}", id)
+                    .contentType(MediaType.TEXT_PLAIN)
                     .bodyValue(descripcion)
                     .retrieve()
                     .bodyToMono(Apk.class)
                     .block();
              return apk;
-        } catch (WebClientResponseException.NotFound e) {
-            System.err.println("Apk con ID " + id + " no encontrada");
-            return null;
         } catch (WebClientResponseException e) {
             System.err.println(e.getStatusCode());
+            return null;
+        }catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
             return null;
         }
     }
@@ -115,37 +139,39 @@ public class ApkClient {
     //añadir descripcion
     public Apk añadirDescripcion(int id, String descripcion) {
         try {
-        	Apk apk = webClient.post()
-                    .uri("apks/descripcion/{id}", id)
+        	Apk apk = webClient.put()
+                    .uri("/apks/descripcion/{id}", id)
+                    .contentType(MediaType.TEXT_PLAIN)
                     .bodyValue(descripcion)
                     .retrieve()
                     .bodyToMono(Apk.class)
                     .block();
              return apk;
-        } catch (WebClientResponseException.NotFound e) {
-            System.err.println("Apk con ID " + id + " no encontrada");
-            return null;
         } catch (WebClientResponseException e) {
             System.err.println(e.getStatusCode());
+            return null;
+        }catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
             return null;
         }
     }
        
     //eliminar descripcion
-    public HttpStatusCode eliminarDescripcion(int id) {
+    public boolean eliminarDescripcion(int id) {
         try {
-        	Apk apk = webClient.delete()
-                    .uri("apks/descripcion/{id}", id)
-                    .retrieve()
-                    .bodyToMono(Apk.class)
-                    .block();
-             return HttpStatusCode.valueOf(200); // no se si se puede
-        } catch (WebClientResponseException.NotFound e) {
-            System.err.println("Apk con ID " + id + " no encontrada");
-            return e.getStatusCode();
-        } catch (WebClientResponseException e) {
+            Boolean eliminado = webClient.delete()
+                .uri("/apks/descripcion/{id}", id)
+                .retrieve()
+                .bodyToMono(Boolean.class) 
+                .block();
+            
+            return eliminado != null && eliminado;
+        }catch (WebClientResponseException e) {
             System.err.println(e.getStatusCode());
-            return e.getStatusCode();
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            return false;
         }
     }
 

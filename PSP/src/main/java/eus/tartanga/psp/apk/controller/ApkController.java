@@ -158,14 +158,14 @@ public class ApkController {
 
 	//Borrar descripcion 
 	@DeleteMapping("/descripcion/{id}")
-	public ResponseEntity<String> eliminarDescripcion(@PathVariable int id){
+	public ResponseEntity<Boolean> eliminarDescripcion(@PathVariable int id){
 
 		boolean eliminada = apkService.eliminarDescripcion(id);
 
 		if(eliminada){
-			return ResponseEntity.status(HttpStatus.OK).body("Descripcion eliminada");
+			return ResponseEntity.status(HttpStatus.OK).body(true);
 		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Descripcion no encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
 			// se podria devolver return ResponseEntity.noContent().build(); 204
 		}
 	}

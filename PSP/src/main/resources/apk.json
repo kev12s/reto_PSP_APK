@@ -1,13 +1,13 @@
 [ {
   "id" : 1,
   "nombre" : "Calculadora",
-  "descripcion" : "Aplicacion actualizada",
+  "descripcion" : "",
   "icono" : "icono_calc.png",
   "nombreApk" : "calculadora.apk"
 }, {
   "id" : 2,
   "nombre" : "Notas",
-  "descripcion" : "",
+  "descripcion" : "DS",
   "icono" : "icono_notas.png",
   "nombreApk" : "notas.apk"
 } ]
