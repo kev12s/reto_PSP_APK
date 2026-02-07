@@ -9,4 +9,10 @@
     <string name="VolumeStr"> Volume </string>
     <string name="NextStr">Next</string>
     <string name="ApplyStr">Apply</string>
+
+    <string name="message_1">Welcome to the application</string>
+    <string name="message_2">This is the second message</string>
+    <string name="message_3">Learning Android is fun</string>
+    <string name="message_4">Last message of the sequence</string>
+    <string name="previous_button">Previous</string>
 </resources>

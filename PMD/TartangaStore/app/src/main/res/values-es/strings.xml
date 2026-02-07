@@ -9,4 +9,9 @@
     <string name="VolumeStr">Volumen</string>
     <string name="NextStr">Siguiente</string>
     <string name="ApplyStr">Aplicar</string>
+    <string name="previous_button">Anterior</string>
+    <string name="message_1">Bienvenido a la aplicación</string>
+    <string name="message_2">Este es el segundo mensaje</string>
+    <string name="message_3">Aprender Android es divertido</string>
+    <string name="message_4">Último mensaje de la secuencia</string>
 </resources>

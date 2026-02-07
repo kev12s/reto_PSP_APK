@@ -9,4 +9,9 @@
     <string name="VolumeStr">Bolumena</string>
     <string name="NextStr">Hurrengoa</string>
     <string name="ApplyStr">Ezarri</string>
+    <string name="message_1">Ongi etorri aplikaziora</string>
+    <string name="message_2">Hau da bigarren mezua</string>
+    <string name="message_3">Android ikastea dibertigarria da</string>
+    <string name="message_4">Sekuentziaren azken mezua</string>
+    <string name="previous_button">Aurrekoa</string>
 </resources>
