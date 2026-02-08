@@ -17,6 +17,6 @@
     <string name="gallery">Zabaldu galeria</string>
     <string name="closeApp">Itxi Aplikazioa</string>
     <string name="affirm">Bai</string>
-    <string name="Negate">No</string>
-    <string name="really">¿Estás seguro de que quieres salir?</string>
+    <string name="Negate">Ez</string>
+    <string name="really">Zihur zaude aplikazioa itxi nahi duzula?</string>
 </resources>

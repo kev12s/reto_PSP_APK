@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.tartangastore.api.ApiService;
 import com.example.tartangastore.api.RetrofitInstance;
+
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -39,6 +42,8 @@ public class AppDownloadActivity extends AppCompatActivity {
     private Button btnCerrar;
     private Button btnAdvice;
     private Button btnOpenGallery;
+    private TextView txtAppDescription;
+    private TextView txtAppName;
     private static final String BASE_IMAGE_URL = "http://192.168.1.95:8080/apks/imagenAPK/";
 
     @Override
@@ -67,9 +72,9 @@ public class AppDownloadActivity extends AppCompatActivity {
         btnCerrar = findViewById(R.id.btnCerrar);
         imgAppIcon = findViewById(R.id.imageView3); // Usando tu imageView3 del XML
         btnAdvice = findViewById(R.id.btnAdvice);
-        // OPCIONAL: Si tienes TextViews para nombre y descripción
-        // txtAppName = findViewById(R.id.textViewAppName);
-        // txtAppDescription = findViewById(R.id.textViewAppDescription);
+
+        txtAppName = findViewById(R.id.textViewAppName);
+        txtAppDescription = findViewById(R.id.textViewAppDescription);
         btnOpenGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,13 +94,13 @@ public class AppDownloadActivity extends AppCompatActivity {
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imgAppIcon);
 
-            // OPCIONAL: Mostrar nombre y descripción si tienes TextViews
-            // if (txtAppName != null && apkName != null) {
-            //     txtAppName.setText(apkName);
-            // }
-            // if (txtAppDescription != null && apkDescription != null) {
-            //     txtAppDescription.setText(apkDescription);
-            // }
+            // Mostrar nombre y descripción
+            if (txtAppName != null && apkName != null) {
+                txtAppName.setText(apkName);
+            }
+            if (txtAppDescription != null && apkDescription != null) {
+               txtAppDescription.setText(apkDescription);
+             }
         }
 
         //boton de descarga
