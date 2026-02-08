@@ -1,12 +1,14 @@
 package eus.reto.psp.APKWebClient.app;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.springframework.http.HttpStatusCode;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import eus.reto.psp.APKWebClient.client.ApkClient;
 import eus.reto.psp.APKWebClient.model.Apk;
@@ -20,7 +22,11 @@ import java.util.Scanner;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
@@ -55,7 +61,7 @@ public class VentanaMain extends JFrame {
 		this.scanner = new Scanner(System.in);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 574, 402);
+		setBounds(100, 100, 976, 455);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -108,20 +114,33 @@ public class VentanaMain extends JFrame {
 		contentPane.add(btnVer);
 
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(126, 44, 383, 145);
+		textArea.setBounds(126, 44, 767, 160);
 		contentPane.add(textArea);
 
 		JLabel lblMensaje = new JLabel("");
-		lblMensaje.setBounds(126, 338, 337, 14);
+		lblMensaje.setBounds(10, 338, 518, 14);
 		contentPane.add(lblMensaje);
-		
+
 		JButton btnImagen = new JButton("IMAGEN");
 		btnImagen.setBounds(10, 311, 96, 23);
 		contentPane.add(btnImagen);
 
+		JLabel lblImagen = new JLabel();
+		lblImagen.setBounds(600, 215, 293, 200); 
+		lblImagen.setHorizontalAlignment(JLabel.CENTER);
+		lblImagen.setVerticalAlignment(JLabel.CENTER);
+		lblImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		lblImagen.setText("Imagen aparecerá aquí");
+		lblImagen.setFont(new Font("Tahoma", Font.ITALIC, 12));
+		contentPane.add(lblImagen);
+
+		JLabel lblTituloImagen = new JLabel("Vista previa de imagen");
+		lblTituloImagen.setBounds(126, 190, 150, 14);
+		contentPane.add(lblTituloImagen);
+
 
 		//APLICACIONES
-		//listar todas apks
+		//listar todas apks (ESTE VA BIEN)
 		btnVer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {    
@@ -139,13 +158,43 @@ public class VentanaMain extends JFrame {
 		btnDescargar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(idtextField.getText());          
+				try {
+					int id = Integer.parseInt(idtextField.getText());          
 
-				byte[] bytes = cliente.descargarApk(id);
-				if(bytes!=null) {
-					lblMensaje.setText("DESCARGAR CORRECTA");
-				}else {
-					lblMensaje.setText("NO SE HA PODIDO DESCARGAR");
+					byte[] bytes = cliente.descargarApk(id);
+					
+					if(bytes != null && bytes.length > 0) {
+		                lblMensaje.setText("APK descargada (" + bytes.length + " bytes). Verificando hash...");
+					}
+					
+					boolean hashValido = cliente.verificarHash(id, bytes);
+
+					if(hashValido) {
+						// Crear carpeta "descargas" si no existe
+						File downloadsDir = new File("descargas");
+						if (!downloadsDir.exists()) {
+							downloadsDir.mkdir();
+						}
+
+						// Crear archivo
+						File apkFile = new File(downloadsDir, "app_" + id + ".apk");
+
+						// Guardar bytes
+						try (FileOutputStream fos = new FileOutputStream(apkFile)) {
+							fos.write(bytes);
+							lblMensaje.setText("APK guardada en: " + apkFile.getAbsolutePath());
+							System.out.println("Guardado: " + apkFile.getAbsolutePath());
+						}
+					} else {
+						lblMensaje.setText("ERROR: No se recibieron datos del servidor");
+					}
+
+				} catch (NumberFormatException ex) {
+					lblMensaje.setText("ID inválido");
+				} catch (IOException ex) {
+					lblMensaje.setText("Error al guardar archivo");
+				} catch (Exception ex) {
+					lblMensaje.setText("Error: " + ex.getMessage());
 				}
 			}
 		});
@@ -154,50 +203,88 @@ public class VentanaMain extends JFrame {
 		btnImagen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(idtextField.getText());
 
-				byte[] bytes = cliente.descargarImagen(id);
-				if(bytes!=null) {
-					lblMensaje.setText("DESCARGAR CORRECTA");
-				}else {
-					lblMensaje.setText("NO SE HA PODIDO DESCARGAR");
+				try {
+					int id = Integer.parseInt(idtextField.getText());
+
+					byte[] bytes = cliente.descargarImagen(id);
+					if(bytes != null && bytes.length > 0) {
+						lblMensaje.setText("DESCARGAR CORRECTA - Tamaño imagen: " + bytes.length + " bytes");
+
+						// Convertir bytes a ImageIcon y mostrar en el JLabel
+						try {
+							ImageIcon icon = new ImageIcon(bytes);
+
+							// Escalar la imagen si es muy grande
+							ImageIcon scaledIcon = scaleImageIcon(icon, 400, 200);
+
+							lblImagen.setIcon(scaledIcon);
+							lblImagen.setText(""); // Limpiar texto
+						} catch (Exception ex) {
+							lblImagen.setText("Error al cargar imagen");
+							lblImagen.setIcon(null);
+							lblMensaje.setText("Error al procesar imagen: " + ex.getMessage());
+						}
+					} else {
+						lblMensaje.setText("NO SE HA PODIDO DESCARGAR LA IMAGEN");
+						lblImagen.setText("Imagen no disponible");
+						lblImagen.setIcon(null);
+					}
+				}catch (NumberFormatException ex) {
+					lblMensaje.setText("ID inválido");
+				}catch (Exception ex) {
+					lblMensaje.setText("Error: " + ex.getMessage());
 				}
 			}
 		});
-		
+
+
 		//descargar hash
 		btnHash.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(idtextField.getText());
+				try {
+					int id = Integer.parseInt(idtextField.getText());
 
-				String hash = cliente.obtenerHash(id);
-				
-				if(hash!=null) {
-					lblMensaje.setText(hash);
-				}else {
-					lblMensaje.setText(hash);
+					String hash = cliente.obtenerHash(id);
+
+					if(hash!=null) {
+						lblMensaje.setText(hash);
+					}else {
+						lblMensaje.setText("Aplicacion no encontrada");
+					}
+				}catch (NumberFormatException ex) {
+					lblMensaje.setText("ID inválido");
+				}catch (Exception ex) {
+					lblMensaje.setText("Error: " + ex.getMessage());
 				}
 			}
 		});
 
-		//DESCRIPCIN 
-		//modificar descripcion
+		//DESCRIPCION 
+		//modificar descripcion (ESTE VA BIEN)
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(idtextField.getText());
-				String descripcion = textArea.getText();
+				try {
+					int id = Integer.parseInt(idtextField.getText());
+					String descripcion = textArea.getText();
 
-				System.out.println("Modificando APK - ID: " + id + ", Descripción: " + descripcion);
+					System.out.println("Modificando APK - ID: " + id + ", Descripción: " + descripcion);
 
-				// Usar Web Client para modificar
-				Apk apk = cliente.modificarDescripcion(id, descripcion);
-				if(apk!=null) {
-					textArea.setText("MODIFICACION CORRETA: " + apk.toString());
-				}else {
-					textArea.setText("MODIFICACION INCORRETA: ");
+					// Usar Web Client para modificar
+					Apk apk = cliente.modificarDescripcion(id, descripcion);
+					if(apk!=null) {
+						textArea.setText("MODIFICACION CORRETA: " + apk.toString());
+					}else {
+						textArea.setText("ERROR: APK NO MODIFICADA");
+					}
+				}catch(NumberFormatException ex) {
+					lblMensaje.setText("ID inválido");
+				}catch (Exception ex) {
+					lblMensaje.setText("Error: " + ex.getMessage());
 				}
+
 			}
 		});
 
@@ -205,36 +292,70 @@ public class VentanaMain extends JFrame {
 		btnAñadir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(idtextField.getText());
-				String descripcion = textArea.getText();
+				try {
+					int id = Integer.parseInt(idtextField.getText());
+					String descripcion = textArea.getText();
 
-				System.out.println("Añadiendo APK - ID: " + id + ", Descripción: " + descripcion);
+					System.out.println("Añadiendo APK - ID: " + id + ", Descripción: " + descripcion);
 
-				Apk apk = cliente.añadirDescripcion(id, descripcion);
-				if(apk!=null) {
-					textArea.setText("MODIFICACION CORRETA: " + apk.toString());
-				}else {
-					textArea.setText("MODIFICACION CORRETA: ");
+					Apk apk = cliente.añadirDescripcion(id, descripcion);
+					if(apk!=null) {
+						textArea.setText("SE HA AÑADIDO CORRECTAMENTE: " + apk.toString());
+					}else {
+						textArea.setText("ERROR: APK NO MODIFICADA");
+					}
+				}catch(NumberFormatException ex) {
+					lblMensaje.setText("ID inválido");
+				}catch(WebClientResponseException.NotFound  ex) {
+					lblMensaje.setText("APK NO ENCONTRADA");
+				}catch(WebClientResponseException.BadRequest  ex) {
+						lblMensaje.setText(ex.getStatusText() + ": NO SE HA INTRODUCIDO DESCRIPCION");
+				}catch (Exception ex) {
+					lblMensaje.setText("Error: " + ex.getMessage());
 				}
 			}
 		});
-		
+
 		//eliminar descripcion
-		btnAñadir.addActionListener(new ActionListener() {
+		btnEliminar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(idtextField.getText());
-				String descripcion = textArea.getText();
+				try {
+					int id = Integer.parseInt(idtextField.getText());
+					String descripcion = textArea.getText();
 
-				HttpStatusCode status = cliente.eliminarDescripcion(id);
-				if(status.equals(200)) {
-					textArea.setText("ELIMINACION CORRETA: " + status);
-				}else {
-					textArea.setText("ELIMINACION INCORRETA: " + status);
+					boolean eliminado = cliente.eliminarDescripcion(id);
+					if(eliminado) {
+						textArea.setText("ELIMINACION CORRETA");
+					}else {
+						textArea.setText("ERROR: APK NO MODIFICADA" );
+					}
+				}catch(NumberFormatException ex) {
+					lblMensaje.setText("ID inválido");
+				}catch (Exception ex) {
+					lblMensaje.setText("Error: " + ex.getMessage());
 				}
 			}
 		});
 
+	}
+
+	// Método para escalar ImageIcon
+	private ImageIcon scaleImageIcon(ImageIcon icon, int maxWidth, int maxHeight) {
+		java.awt.Image img = icon.getImage();
+		int originalWidth = icon.getIconWidth();
+		int originalHeight = icon.getIconHeight();
+
+		// Calcular nuevo tamaño manteniendo proporción
+		double widthRatio = (double) maxWidth / originalWidth;
+		double heightRatio = (double) maxHeight / originalHeight;
+		double ratio = Math.min(widthRatio, heightRatio);
+
+		int newWidth = (int) (originalWidth * ratio);
+		int newHeight = (int) (originalHeight * ratio);
+
+		java.awt.Image scaledImg = img.getScaledInstance(newWidth, newHeight, java.awt.Image.SCALE_SMOOTH);
+		return new ImageIcon(scaledImg);
 	}
 
 

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,6 +165,27 @@ public class ApkService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	//calcular hash pero de bytes (para la aplicacion enviada por el cliente)
+	public String calcularHash(byte[] bytes) throws NoSuchAlgorithmException {
+	    if (bytes == null || bytes.length == 0) {
+	        return null;
+	    }
+	    
+	    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	    byte[] hashBytes = digest.digest(bytes);
+	    
+	    StringBuilder hexString = new StringBuilder();
+	    for (byte b : hashBytes) {
+	        String hex = Integer.toHexString(0xff & b);
+	        if (hex.length() == 1) {
+	            hexString.append('0');
+	        }
+	        hexString.append(hex);
+	    }
+	    
+	    return hexString.toString();
 	}
 
 	//2º PARTE DESCRIPCION
