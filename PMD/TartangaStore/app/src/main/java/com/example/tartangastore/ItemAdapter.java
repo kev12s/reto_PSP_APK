@@ -1,6 +1,7 @@
 package com.example.tartangastore;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,30 +9,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+import com.example.tartangastore.model.Apk;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private List<Item> items;
+    private Context context;
+    private List<Apk> apkList;
     private OnItemClickListener listener;
 
-    // Interfaz para manejar clics
+    // Interfaz SOLO con onItemClick
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(Apk apk);
     }
 
     // Constructor
-    public ItemAdapter(List<Item> items) {
-        this.items = items;
-    }
-
-    // Constructor con listener
-    public ItemAdapter(List<Item> items, OnItemClickListener listener) {
-        this.items = items;
-        this.listener = listener;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public ItemAdapter(Context context, List<Apk> apkList, OnItemClickListener listener) {
+        this.context = context;
+        this.apkList = apkList;
         this.listener = listener;
     }
 
@@ -45,31 +41,36 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Item item = items.get(position);
+        Apk apk = apkList.get(position);
 
-        holder.titleView.setText(item.getTitle());
-        holder.descriptionView.setText(item.getDescription());
-        holder.imageView.setImageResource(item.getImageResId());
+        // Configurar los datos del APK
+        holder.titleView.setText(apk.getNombre());
+        holder.descriptionView.setText(apk.getDescripcion());
+        
+        // Cargar imagen usando Glide directamente desde la URL
+        String imageUrl = "http://192.168.1.95:8080/apks/imagenAPK/" + apk.getId();
+        
+        Glide.with(context)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(holder.imageView);
 
-        // Configurar click listener si existe
-        if (listener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(position);
-                }
-            });
-        }
+        // Configurar clic
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(apk);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return apkList != null ? apkList.size() : 0;
     }
 
-    // Método para actualizar datos
-    public void updateData(List<Item> newItems) {
-        items = newItems;
+    public void updateData(List<Apk> newApkList) {
+        apkList = newApkList;
         notifyDataSetChanged();
     }
 
@@ -82,7 +83,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.itemImageView);
-           // titleView = itemLayout.findViewById(R.id.itemTitle);
+            titleView = itemView.findViewById(R.id.itemTitle);
             descriptionView = itemView.findViewById(R.id.itemDescription);
         }
     }
