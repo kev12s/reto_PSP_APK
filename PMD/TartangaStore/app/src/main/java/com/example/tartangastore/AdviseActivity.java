@@ -18,6 +18,7 @@ public class AdviseActivity extends AppCompatActivity {
     private Button btnPrevious, btnNext;
     private VideoView videoView;
     private int currentIndex = 0;
+    private Button btnOpenGallery;
     // Array de IDs de recursos para los mensajes
     private int[] messageIds = {
             R.string.message_1,
@@ -43,7 +44,7 @@ public class AdviseActivity extends AppCompatActivity {
         btnPrevious = findViewById(R.id.buttonPrev);
         btnNext = findViewById(R.id.buttonNext);
         showCurrentMessage();
-        Button btnOpenGallery = findViewById(R.id.btnOpenGallery);
+        btnOpenGallery = findViewById(R.id.btnOpenGallery);
         btnOpenGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,10 +10,14 @@
     <string name="NextStr">Next</string>
     <string name="ApplyStr">Apply</string>
 
-    <string name="message_1">Welcome to the application</string>
-    <string name="message_2">This is the second message</string>
-    <string name="message_3">Learning Android is fun</string>
-    <string name="message_4">Last message of the sequence</string>
+    <string name="message_1">Manage your screen time intentionally. Set limits: Use features like \"Screen Time\" (iOS) or \"Digital Wellbeing\" (Android) to monitor and restrict time spent on time-consuming apps (social media, games). Block out screen-free moments: Designate device-free times, such as during meals, the first hour of the day, or before bed. This improves concentration, sleep, and personal relationships.</string>
+    <string name="message_2">Protect your privacy and security. Use unique and strong passwords: Use a password manager to create complex and distinct passwords for each service. Enable two-factor authentication (2FA) whenever possible. Review privacy settings: Regularly adjust privacy settings on social media and apps to control what information you share and with whom. Disable unnecessary permissions (such as location or microphone) in apps that don\'t require them.</string>
+    <string name="message_3">Practice good information hygiene. Check before you share: Compare sources and be wary of sensationalist headlines. Use fact-checking websites to combat misinformation. Take breaks from constant news: Limit your news consumption (especially negative news) to reduce anxiety. Set specific times to get your news.</string>
+    <string name="message_4">Promote physical and mental balance. Posture and eye rest: Adjust the screen height to eye level, use adequate lighting, and follow the 20-20-20 rule (every 20 minutes, look at something 20 feet away for 20 seconds). Consider using blue light filters at night. Seek offline activities: Balance your digital time with analog hobbies (reading, sports, walking) that don\'t require screens. Prioritize face-to-face interactions to maintain genuine connections.</string>
     <string name="previous_button">Previous</string>
     <string name="gallery">Open Gallery</string>
+    <string name="closeApp">Close App</string>
+    <string name="affirm">Yes</string>
+    <string name="Negate">No</string>
+    <string name="really">Are you sure you want to close the app?</string>
 </resources>

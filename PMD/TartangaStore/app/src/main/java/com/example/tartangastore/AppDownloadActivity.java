@@ -1,5 +1,7 @@
 package com.example.tartangastore;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +36,9 @@ public class AppDownloadActivity extends AppCompatActivity {
     private Button btnSettings;
     private Button btnDownload;
     private ImageView imgAppIcon;
+    private Button btnCerrar;
+    private Button btnAdvice;
+    private Button btnOpenGallery;
     private static final String BASE_IMAGE_URL = "http://192.168.1.95:8080/apks/imagenAPK/";
 
     @Override
@@ -55,17 +60,23 @@ public class AppDownloadActivity extends AppCompatActivity {
                 "Datos recibidos - ID: " + apkId +
                         ", Nombre: " + apkName +
                         ", Desc: " + apkDescription);
-
+        btnOpenGallery = findViewById(R.id.btnOpenGallery);
         btnHome = findViewById(R.id.btnExitAdvise);
         btnSettings = findViewById(R.id.btnSettings);
         btnDownload = findViewById(R.id.button4);  // Tu botón de descarga
-
+        btnCerrar = findViewById(R.id.btnCerrar);
         imgAppIcon = findViewById(R.id.imageView3); // Usando tu imageView3 del XML
-
+        btnAdvice = findViewById(R.id.btnAdvice);
         // OPCIONAL: Si tienes TextViews para nombre y descripción
         // txtAppName = findViewById(R.id.textViewAppName);
         // txtAppDescription = findViewById(R.id.textViewAppDescription);
-
+        btnOpenGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AppDownloadActivity.this, ImageViewerActivity.class);
+                startActivity(intent);
+            }
+        });
         //configurar lo que se muestra en la tarjeta
         if (apkId != -1) {
             // Cargar imagen de la APK
@@ -102,6 +113,14 @@ public class AppDownloadActivity extends AppCompatActivity {
             }
         });
 
+        btnAdvice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Abrir MainActivity
+                Intent intent = new Intent(AppDownloadActivity.this, AdviseActivity.class);
+                startActivity(intent);
+            }
+        });
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +129,6 @@ public class AppDownloadActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +138,12 @@ public class AppDownloadActivity extends AppCompatActivity {
             }
         });
 
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDialogoConfirmacion();
+            }
+        });
     }
 
     private void iniciarDescarga(int apkId, String apkName, String apkFileName) {
@@ -300,5 +324,17 @@ public class AppDownloadActivity extends AppCompatActivity {
         });
     }
 
-
+    private void mostrarDialogoConfirmacion() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.closeApp)
+                .setMessage(R.string.really)
+                .setPositiveButton(R.string.affirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishAffinity();
+                    }
+                })
+                .setNegativeButton(R.string.Negate, null)
+                .show();
+    }
 }

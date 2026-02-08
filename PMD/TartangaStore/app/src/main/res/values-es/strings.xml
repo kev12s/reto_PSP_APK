@@ -10,9 +10,13 @@
     <string name="NextStr">Siguiente</string>
     <string name="ApplyStr">Aplicar</string>
     <string name="previous_button">Anterior</string>
-    <string name="message_1">Bienvenido a la aplicación</string>
-    <string name="message_2">Este es el segundo mensaje</string>
-    <string name="message_3">Aprender Android es divertido</string>
-    <string name="message_4">Último mensaje de la secuencia</string>
+    <string name="message_1">Gestiona tu tiempo en pantalla con intención.Establece límites: Usa funciones como \"Tiempo de uso\" (iOS) o \"Bienestar digital\" (Android) para monitorear y restringir el tiempo en apps que consumen mucho tiempo (redes sociales, juegos).Bloquea momentos libres de pantalla: Designa horarios sin dispositivos, como durante las comidas, la primera hora del día o antes de dormir. Esto mejora la concentración, el sueño y las relaciones personales.</string>
+    <string name="message_2">Cuida tu privacidad y seguridad. Contraseñas únicas y fuertes: Usa un gestor de contraseñas para crear claves complejas y distintas en cada servicio. Activa la autenticación en dos factores (2FA) siempre que sea posible. Revisa configuraciones de privacidad: Regularmente ajusta la privacidad en redes sociales y apps para controlar qué información compartes y con quién. Desactiva permisos innecesarios (como ubicación o micrófono) en apps que no los requieran.</string>
+    <string name="message_3">Practica una higiene informativa. Verifica antes de compartir: Contrasta fuentes y desconfía de titulares sensacionalistas. Usa sitios de confirmación de hechos para combatir desinformación. Desconéctate de noticias constantes: Dosifica el consumo de noticias (especialmente negativas) para reducir la ansiedad. Establece horarios específicos para informarte.</string>
+    <string name="message_4">Fomenta un equilibrio físico y mental. Postura y descanso visual: Ajusta la altura de la pantalla a la vista, usa luz adecuada y sigue la regla 20-20-20 (cada 20 minutos, mira algo a 6 metros por 20 segundos). Considera filtros de luz azul en la noche. Busca actividades offline: Equilibra tu tiempo digital con hobbies analógicos (leer, deporte, pasear) que no requieran pantallas. Prioriza interacciones cara a cara para mantener vínculos reales.</string>
     <string name="gallery">Abrir Galeria</string>
+    <string name="closeApp">Cerrar aplicacion</string>
+    <string name="affirm">Sí</string>
+    <string name="Negate">Ez</string>
+    <string name="really">Zihur zaude aplikazioa itxi nahi duzula?</string>
 </resources>

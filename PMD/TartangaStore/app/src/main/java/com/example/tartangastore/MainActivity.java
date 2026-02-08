@@ -1,5 +1,7 @@
 package com.example.tartangastore;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ApiService apiService;
     private Button btnSettings;
     private Button btnAdvice;
+    private Button btnCerrar;
     private RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
     private List<Apk> listaApks = new ArrayList<>();
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         btnAdvice = findViewById(R.id.btnAdvice);
         btnSettings = findViewById(R.id.btnSettings);
-        
+        btnCerrar = findViewById(R.id.btnCerrar);
         // Configurar RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -65,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         
         recyclerView.setAdapter(itemAdapter);
 
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDialogoConfirmacion();
+            }
+        });
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +96,19 @@ public class MainActivity extends AppCompatActivity {
         // Obtener lista de APKs
         obtenerListaApks();
     }
-
+    private void mostrarDialogoConfirmacion() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.closeApp)
+                .setMessage(R.string.really)
+                .setPositiveButton(R.string.affirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishAffinity();
+                    }
+                })
+                .setNegativeButton(R.string.Negate, null)
+                .show();
+    }
     private void obtenerListaApks() {
         Call<List<Apk>> call = apiService.obtenerTodasApks();
 

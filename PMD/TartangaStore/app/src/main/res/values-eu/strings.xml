@@ -9,10 +9,14 @@
     <string name="VolumeStr">Bolumena</string>
     <string name="NextStr">Hurrengoa</string>
     <string name="ApplyStr">Ezarri</string>
-    <string name="message_1">Ongi etorri aplikaziora</string>
-    <string name="message_2">Hau da bigarren mezua</string>
-    <string name="message_3">Android ikastea dibertigarria da</string>
-    <string name="message_4">Sekuentziaren azken mezua</string>
+    <string name="message_1">Kudeatu pantaila-denbora nahita. Ezarri mugak: Erabili \"Pantaila-denbora\" (iOS) edo \"Ongizate digitala\" (Android) bezalako funtzioak denbora asko eskatzen duten aplikazioetan (sare sozialak, jokoak) emandako denbora kontrolatu eta mugatzeko. Blokeatu pantailarik gabeko uneak: Izendatu gailurik gabeko uneak, hala nola otorduetan, eguneko lehen orduan edo oheratu aurretik. Horrek kontzentrazioa, loa eta harreman pertsonalak hobetzen ditu.</string>
+    <string name="message_2">Babestu zure pribatutasuna eta segurtasuna. Erabili pasahitz bakarrak eta sendoak: Erabili pasahitz kudeatzaile bat zerbitzu bakoitzerako pasahitz konplexu eta desberdinak sortzeko. Gaitu bi faktoreko autentifikazioa (2FA) ahal den guztietan. Berrikusi pribatutasun ezarpenak: Egokitu aldizka pribatutasun ezarpenak sare sozialetan eta aplikazioetan, zer informazio partekatzen duzun eta norekin kontrolatzeko. Desgaitu beharrezkoak ez diren baimenak (kokapena edo mikrofonoa, adibidez) horiek behar ez dituzten aplikazioetan.</string>
+    <string name="message_3">Informazio-higiene ona praktikatu. Egiaztatu partekatu aurretik: Konparatu iturriak eta kontuz ibili titular sentsazionalistekin. Erabili datuak egiaztatzeko webguneak informazio okerraren aurka egiteko. Hartu atsedenak etengabeko albisteetatik: Mugatu albisteen kontsumoa (batez ere albiste negatiboak) antsietatea murrizteko. Ezarri ordu zehatzak zure berriak jasotzeko.</string>
+    <string name="message_4">Sustatu oreka fisikoa eta mentala. Jarrera eta begien atsedena: Egokitu pantailaren altuera begi-mailara, erabili argiztapen egokia eta jarraitu 20-20-20 araua (20 minuturo, begiratu 20 oinera dagoen zerbaiti 20 segundoz). Kontuan hartu argi urdinaren iragazkiak erabiltzea gauez. Bilatu lineaz kanpoko jarduerak: Orekatu zure denbora digitala pantailarik behar ez duten zaletasun analogikoekin (irakurketa, kirolak, oinez ibiltzea). Lehentasuna eman aurrez aurreko interakzioei benetako konexioak mantentzeko.</string>
     <string name="previous_button">Aurrekoa</string>
     <string name="gallery">Zabaldu galeria</string>
+    <string name="closeApp">Itxi Aplikazioa</string>
+    <string name="affirm">Bai</string>
+    <string name="Negate">No</string>
+    <string name="really">¿Estás seguro de que quieres salir?</string>
 </resources>
