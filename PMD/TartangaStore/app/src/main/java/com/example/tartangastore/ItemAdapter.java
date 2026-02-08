@@ -2,6 +2,7 @@ package com.example.tartangastore;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tartangastore.model.Apk;
+import com.bumptech.glide.Glide;
+import com.example.tartangastore.model.Apk;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
+    private Context context;
+    private List<Apk> apkList;
     private Context context;
     private List<Apk> apkList;
     private OnItemClickListener listener;
@@ -46,10 +51,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         // Configurar los datos del APK
         holder.titleView.setText(apk.getNombre());
         holder.descriptionView.setText(apk.getDescripcion());
-
+        
         // Cargar imagen usando Glide directamente desde la URL
-        String imageUrl = "http://192.168.41.128:8080/apks/imagenAPK/" + apk.getId();
-
+        String imageUrl = "http://192.168.1.95:8080/apks/imagenAPK/" + apk.getId();
+        
         Glide.with(context)
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_launcher_foreground)
