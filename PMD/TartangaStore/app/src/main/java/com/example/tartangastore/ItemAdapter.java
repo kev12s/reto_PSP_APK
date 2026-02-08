@@ -20,8 +20,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private Context context;
     private List<Apk> apkList;
-    private Context context;
-    private List<Apk> apkList;
     private OnItemClickListener listener;
 
     // Interfaz SOLO con onItemClick
