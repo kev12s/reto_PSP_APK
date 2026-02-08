@@ -53,18 +53,6 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonNext"
         app:layout_constraintVertical_bias="0.477" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="269dp"
-        android:layout_height="68dp"
-        android:text="https://www.scsalud.es/adicci%C3%https://www.quironsalud.com/blogs/es/blogs-quironsalud/sana-mente/consiste-tratamiento-adiccion-videojuegos"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
-        app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
-        app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
-        app:layout_constraintTop_toTopOf="@+id/materialToolbar2" />
-
     <Button
         android:id="@+id/buttonPrev"
         android:layout_width="wrap_content"
@@ -83,9 +71,31 @@
         android:layout_height="85dp"
         android:text="TextView"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
         app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
         app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
-        app:layout_constraintTop_toTopOf="@+id/materialToolbar2" />
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <VideoView
+        android:id="@+id/videoSdig"
+        android:layout_width="256dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+        app:layout_constraintTop_toBottomOf="@+id/textmsg" />
+
+    <Button
+        android:id="@+id/btnOpenGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery"
+        app:layout_constraintBottom_toTopOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.763" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

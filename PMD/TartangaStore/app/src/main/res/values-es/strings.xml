@@ -14,4 +14,5 @@
     <string name="message_2">Este es el segundo mensaje</string>
     <string name="message_3">Aprender Android es divertido</string>
     <string name="message_4">Último mensaje de la secuencia</string>
+    <string name="gallery">Abrir Galeria</string>
 </resources>
